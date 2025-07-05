@@ -1,6 +1,6 @@
-const express = require('express')
-const router = express.Router()
-const { getProjects, addProject, deleteProject } = require('../controllers/Project')
+const express = require('express');
+const router = express.Router();
+const { getProjects, addProject, deleteProject } = require('../controllers/Project');
 const multer = require('multer')
 const path = require('path')
 
