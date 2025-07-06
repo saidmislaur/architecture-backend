@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getProjects, addProject, deleteProject } = require('../controllers/Project');
+const { getProjects, getProjectById, updateProject, deleteProject, createProject } = require('../controllers/Project');
 const multer = require('multer')
 const path = require('path')
 
@@ -16,7 +16,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 router.get('/', getProjects)
-router.post('/', upload.array('images'), addProject)
+router.get('/:id', getProjectById)
+router.post('/', upload.array('images'), createProject)
+router.put("/:id", updateProject)
 router.delete('/:id', deleteProject)
 
 module.exports = router

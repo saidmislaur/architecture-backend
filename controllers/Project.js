@@ -5,18 +5,39 @@ exports.getProjects = async (req, res) => {
   res.json(projects)
 }
 
-exports.addProject = async (req, res) => {
+exports.getProjectById = async(req, res) => {
+  const project = await Project.findById(req.params.id);
+  res.json(project)
+}
+
+exports.createProject = async (req, res) => {
   try {
-    const { title, description } = req.body
-    const images = req.files.map(file => `/uploads/${file.filename}`)
+    const { title, description, image } = req.body;
 
-    const project = new Project({ title, description, images })
-    await project.save()
+    let images = [];
+    if (req.files && req.files.length) {
+      images = req.files.map((file) => file.path);
+    } else if (image) {
+      images = [image];
+    }
 
-    res.status(201).json(project)
+    const project = await Project.create({
+      title,
+      description,
+      images,
+    });
+
+    res.status(201).json(project);
   } catch (err) {
-    res.status(500).json({ message: 'Ошибка при добавлении проекта' })
+    console.error('Ошибка при создании проекта:', err);
+    res.status(500).json({ message: 'Ошибка сервера' });
   }
+};
+
+
+exports.updateProject = async(req, res) => {
+  const update = await Project.findByIdAndUpdate(req.params.id, req.body, {new: true});
+  res.json(update)
 }
 
 exports.deleteProject = async (req, res) => {

@@ -10,6 +10,7 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
     images: [String],
+    location: {String},
     createdAt: {
         type: Date,
         default: Date.now,
