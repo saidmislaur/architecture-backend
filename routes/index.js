@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { getProjects, getProjectById, updateProject, deleteProject, createProject } = require('../controllers/Project');
+const { 
+  getProjects, 
+  getProjectById, 
+  updateProject, 
+  deleteProject, 
+  createProject, 
+  getStats } = require('../controllers/Project');
 const multer = require('multer')
 const path = require('path')
 
@@ -20,5 +26,6 @@ router.get('/:id', getProjectById)
 router.post('/', upload.array('images'), createProject)
 router.put("/:id", updateProject)
 router.delete('/:id', deleteProject)
+router.get("/stats/data", getStats)
 
 module.exports = router
