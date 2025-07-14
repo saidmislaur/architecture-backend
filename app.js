@@ -15,12 +15,14 @@ app.use(express.json())
 const projectRoutes = require('./routes/index.js')
 const uploadRoutes = require('./routes/uploadRoutes.js')
 const contactRoutes = require('./routes/contactRoutes.js');
+const authLogin = require('./routes/auth.js')
 app.use("/api/projects", projectRoutes)
 app.use("/api/upload", uploadRoutes)
 app.use('/api/contact', contactRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/hero', require('./routes/heroRoutes'))
 app.use('/api/settings', require('./routes/settingRoutes'))
+app.use('/api', authLogin)
 
 
 mongoose.connect(process.env.MONGO_URI)
