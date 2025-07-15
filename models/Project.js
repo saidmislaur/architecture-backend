@@ -23,7 +23,6 @@ const locationSchema = new mongoose.Schema({
   },
   district: {
     type: String,
-    required: true,
   },
   city: {
     type: String,
@@ -31,7 +30,7 @@ const locationSchema = new mongoose.Schema({
   },
   plotArea: {
     type: String,
-    required: true,
+    required: false,
   },
   mapImage: {
     type: String,
@@ -42,7 +41,7 @@ const locationSchema = new mongoose.Schema({
 const keyFeatureSchema = new mongoose.Schema({
   icon: {
     type: String,
-    required: true,
+    required: false,
   },
   title: {
     type: String,
@@ -115,7 +114,6 @@ const projectSchema = new mongoose.Schema(
   },
 )
 
-// Индексы для поиска
 projectSchema.index({ title: "text", type: "text" })
 projectSchema.index({ category: 1 })
 projectSchema.index({ status: 1 })
